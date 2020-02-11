@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title%}Hello TechnoController
+{% endblock %}
+
+{% block content %}
+	<div>
+		<a href="{{path('techno_add')}}">Ajouter des technos</a>
+	</div>
+	<div>
+		<h2>Liste des technos :</h2>
+		<table>
+			<tr>
+				<th>Nom</th>
+				<th>Action</th>
+			</tr>
+            {% for techno in technos %}
+                <tr>
+                    <td>{{ techno.name }}</td>   
+                    <td><a href="{{ path('techno_edit', {id:techno.id}) }}">Modifier</a></td>
+                    <td><a href="{{ path('techno_delete', {id:techno.id}) }}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+		</table>
+	</div>
+
+{% endblock %}
