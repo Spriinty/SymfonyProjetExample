@@ -21,7 +21,7 @@ class TechnoType extends AbstractType
                 'expanded' => true,
                 'multiple' => true
                 ])
-            ->add('Ajouter', SubmitType::class)
+            ->add('ajouter', SubmitType::class)
         ;
     }
 

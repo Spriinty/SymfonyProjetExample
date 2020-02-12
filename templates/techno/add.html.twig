@@ -2,11 +2,24 @@
 
 {% block content %}
 
-<section>
-    <h1>Ajout de Technos :</h1>
+	<section class="container-fluid">
+		<h1>Ajout de Technos :</h1>
 
-    <p>{{ form(form) }}</p>
+		<div>
+        
+            {{ form_start( form, {attr:{novalidate:'novalidate'}} ) }}
+                <div>
+                    {{ form_label(form.name,'Nom de la techno ') }}
+                    {{ form_widget(form.name) }}
+                </div>
+                <div>
+                    {{ form_widget(form.ajouter, { 'label': 'Ajouter' }) }}
+                </div>
 
-</section>
+
+			{{ form_end( form ) }}
+
+		</div>
+	</section>
 
 {% endblock %}
