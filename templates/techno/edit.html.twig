@@ -2,9 +2,24 @@
 
 {% block content %}
 
-<section>
-    <h1>Édition d'une techno</h1>
-</section>
-<div>{{ form(form) }}</div>
+	<section class="container-fluid">
+		<div class="container">
+			<h1>Édition d'une techno</h1>
+
+			<div>
+				{{ form_start( form, {attr:{novalidate:'novalidate'}}) }}
+				<div>
+					{{ form_label(form.name,'Nom de la techno ') }}
+					{{ form_widget(form.name) }}
+				</div>
+
+				<div>
+					{{ form_widget(form.ajouter, { 'label': 'Modifier' }, {'attr':{'class': 'btn btn-primary'}}) }}
+				</div>
+				{{ form_end( form, {'render_rest' : false} ) }}
+			</div>
+		</div>
+	</section>
+
 
 {% endblock %}

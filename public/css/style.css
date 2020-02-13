@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700|Permanent+Marker&display=swap');
+
+
+
+/*-------------FONTS---------------*/
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+.font-family-Permanent {
+    font-family: 'Permanent Marker', sans-serif;
+}

@@ -34,7 +34,7 @@ class Projet
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Techno", mappedBy="projets")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Techno", inversedBy="projets")
      */
     private $technos;
 

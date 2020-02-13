@@ -24,7 +24,7 @@ class Techno
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Projet", inversedBy="technos")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projet", mappedBy="technos")
      */
     private $projets;
 

@@ -3,22 +3,27 @@
 {% block content %}
 
 	<section class="container-fluid">
-		<h1>Ajout de Technos :</h1>
+		<div class="container">
 
-		<div>
-        
-            {{ form_start( form, {attr:{novalidate:'novalidate'}} ) }}
-                <div>
-                    {{ form_label(form.name,'Nom de la techno ') }}
-                    {{ form_widget(form.name) }}
-                </div>
-                <div>
-                    {{ form_widget(form.ajouter, { 'label': 'Ajouter' }) }}
-                </div>
+			<h1>Ajout de Technos :</h1>
+
+			<div>
+				{{ form_start( form, {attr:{novalidate:'novalidate'}}) }}
+				<div>
+					{{ form_label(form.name,'Nom de la techno ') }}
+					{{ form_widget(form.name) }}
+				</div>
+
+				<div>
+					{{ form_widget(form.ajouter, { 'label': 'Ajouter' }, {'attr':{'class': 'btn btn-primary'}}) }}
+				</div>
 
 
-			{{ form_end( form ) }}
 
+
+				{{ form_end( form, {'render_rest' : false} ) }}
+
+			</div>
 		</div>
 	</section>
 
