@@ -42,30 +42,30 @@ class TechnoController extends AbstractController
         // Si c'est valide et soumis :
         if ($form->isSubmitted() && $form->isValid()) {
 
-                      $logoFile = $form->get('logo')->getData();
+            $logoFile = $form->get('logo')->getData();
 
-                      // this condition is needed because the 'brochure' field is not required
-                      // so the PDF file must be processed only when a file is uploaded
-                      if ($logoFile) {
-                          $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                          // this is needed to safely include the file name as part of the URL
-                          $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                          $newFilename = $safeFilename.'-'.uniqid().'.'.$logoFile->guessExtension();
-          
-                          // Move the file to the directory where brochures are stored
-                          try {
-                              $logoFile->move(
-                                  $this->getParameter('logo_directory'),
-                                  $newFilename
-                              );
-                          } catch (FileException $e) {
-                              // ... handle exception if something happens during file upload
-                          }
-          
-                          // updates the 'brochureFilename' property to store the PDF file name
-                          // instead of its contents
-                          $techno->setLogo($newFilename);
-                      }
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($logoFile) {
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $logoFile->move(
+                        $this->getParameter('logo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $techno->setLogo($newFilename);
+            }
 
              //On insère les données :
             $entityManager->persist($techno);
@@ -75,8 +75,6 @@ class TechnoController extends AbstractController
 
             return $this->redirectToRoute('techno');
         }
-
-
 
         return $this->render('techno/add.html.twig', [
             'form' => $form->createView(),
@@ -95,6 +93,31 @@ class TechnoController extends AbstractController
             // Si c'est valide et soumis :
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $logoFile = $form->get('logo')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($logoFile) {
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $logoFile->move(
+                        $this->getParameter('logo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $techno->setLogo($newFilename);
+            }
+            
             //Commit de la base de données
             $entityManager->flush();
             //On retourne sur la route projet
