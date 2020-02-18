@@ -7,6 +7,7 @@ use App\Entity\Techno;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -16,6 +17,11 @@ class TechnoType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('logo', FileType::class, [
+                'label' => 'Ajouter un logo',
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('projets', EntityType::class, [
                 'class' => Projet::class,
                 'expanded' => true,

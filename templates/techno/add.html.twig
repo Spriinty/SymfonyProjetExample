@@ -19,10 +19,15 @@
 				</div>
 
 				<div>
+					{{ form_errors(form.logo)}}
+					{{ form_label(form.logo,'Upload une image') }}
+					{{ form_widget(form.logo) }}
+				</div>
+
+				<div>
 					{{ form_widget(form._token) }}
 					{{ form_widget(form.ajouter, { 'label': 'Ajouter' }, {'attr':{'class': 'btn btn-primary'}}) }}
 				</div>
-
 
 				{{ form_end( form, {'render_rest' : false} ) }}
 
