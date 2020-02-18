@@ -2,12 +2,14 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory;
 use App\Entity\Projet;
 use App\Entity\Techno;
+use App\Entity\User;
 use App\Repository\TechnoRepository;
-use Faker\Factory;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
@@ -17,6 +19,12 @@ class AppFixtures extends Fixture
         'JavaScript'
     ];
 
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
     private function loadTechno( ObjectManager $manager ){
         foreach( $this::TECHNO AS $value){
@@ -29,7 +37,7 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    private function loadUser( ObjectManager $manager ){
+    private function loadProjet( ObjectManager $manager ){
         $faker = \Faker\Factory::create('fr_FR');
 
         for( $i = 0; $i <10; $i++){
@@ -44,9 +52,23 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
+    private function loadUser( ObjectManager $manager ){
+        $admin = new User;
+        $admin->setUsername('admin');
+        $admin->setPassword($this->passwordEncoder->encodePassword(
+            $admin,
+            'NissanJukeNismo'
+        ));
+        $admin->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($admin);
+        $manager->flush();
+    }
+
     public function load( ObjectManager $manager )
     {
         $this->loadTechno( $manager );
+        $this->loadProjet( $manager );
         $this->loadUser( $manager );
 
     }
